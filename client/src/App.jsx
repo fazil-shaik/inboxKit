@@ -4,7 +4,8 @@ import Grid from './components/Grid';
 import UI from './components/UI';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-const socket = io('http://localhost:3001');
+const SOCKET_URL = import.meta.env.PROD ? 'https://inbox-kit-xi.vercel.app/' : 'http://localhost:3001';
+const socket = io(SOCKET_URL);
 
 function App() {
   const [grid, setGrid] = useState(new Map());
@@ -30,8 +31,8 @@ function App() {
       // also optimistically update the user's score if it was them
       if (data.owner === socket.id) {
         setUser((prevUser) => {
-           // This is handled by the server sending leaderboard, but local update feels faster.
-           return prevUser;
+          // This is handled by the server sending leaderboard, but local update feels faster.
+          return prevUser;
         });
       }
     });
@@ -60,16 +61,16 @@ function App() {
 
   const handleCellClick = useCallback((x, y) => {
     socket.emit('claim_block', { x, y });
-    
+
     // Optimistic UI update
     setGrid((prev) => {
-        const cellId = `${x},${y}`;
-        const prevOwner = prev.get(cellId)?.owner;
-        if (prevOwner === socket.id) return prev; // Already ours
-        
-        const newGrid = new Map(prev);
-        newGrid.set(cellId, { owner: socket.id, color: user.color, timestamp: Date.now(), optimistic: true });
-        return newGrid;
+      const cellId = `${x},${y}`;
+      const prevOwner = prev.get(cellId)?.owner;
+      if (prevOwner === socket.id) return prev; // Already ours
+
+      const newGrid = new Map(prev);
+      newGrid.set(cellId, { owner: socket.id, color: user.color, timestamp: Date.now(), optimistic: true });
+      return newGrid;
     });
   }, [user]);
 
@@ -78,7 +79,7 @@ function App() {
   return (
     <>
       <UI user={user} leaderboard={leaderboard} errorMsg={errorMsg} />
-      
+
       <div className="grid-container">
         <TransformWrapper
           initialScale={1}
@@ -89,10 +90,10 @@ function App() {
           panning={{ velocityMultiplier: 0.5 }}
         >
           <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-            <Grid 
-              gridSize={gridSize} 
-              gridData={grid} 
-              onCellClick={handleCellClick} 
+            <Grid
+              gridSize={gridSize}
+              gridData={grid}
+              onCellClick={handleCellClick}
             />
           </TransformComponent>
         </TransformWrapper>
