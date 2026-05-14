@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: ["http://localhost:5173", "https://inbox-kit-xi.vercel.app", "https://inbox-kit-gxe4.vercel.app/"] }));
+app.use(cors({ origin: ["http://localhost:5173", "https://inbox-kit-xi.vercel.app", "https://inbox-kit-gxe4.vercel.app"] }));
 
 const server = http.createServer(app);
 const io = new Server(server, {
