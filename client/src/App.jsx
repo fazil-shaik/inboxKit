@@ -4,7 +4,7 @@ import Grid from './components/Grid';
 import UI from './components/UI';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-const SOCKET_URL = import.meta.env.PROD ? 'https://inbox-kit-xi.vercel.app/' : 'http://localhost:3001';
+const SOCKET_URL = import.meta.env.PROD ? 'https://inboxkit-1dej.onrender.com/' : 'http://localhost:3001';
 const socket = io(SOCKET_URL);
 
 function App() {
