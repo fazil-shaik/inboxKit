@@ -7,12 +7,12 @@ const UI = ({ user, leaderboard, errorMsg }) => {
       {/* Left side: Player Info */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
         <div className="glass-panel" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div 
-            style={{ 
-              width: '32px', height: '32px', borderRadius: '50%', 
+          <div
+            style={{
+              width: '32px', height: '32px', borderRadius: '50%',
               backgroundColor: user.color,
               boxShadow: `0 0 10px ${user.color}`
-            }} 
+            }}
           />
           <div>
             <div style={{ fontSize: '0.8rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '1px' }}>You</div>
@@ -39,17 +39,17 @@ const UI = ({ user, leaderboard, errorMsg }) => {
           <Trophy size={20} color="#fbbf24" />
           <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Leaderboard</h2>
         </div>
-        
+
         <div style={{ overflowY: 'auto', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {leaderboard.length === 0 ? (
             <div style={{ opacity: 0.5, textAlign: 'center' }}>No players yet</div>
           ) : (
             leaderboard.map((player, index) => (
-              <div 
-                key={player.id} 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
+              <div
+                key={player.id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '0.5rem',
                   borderRadius: '8px',
