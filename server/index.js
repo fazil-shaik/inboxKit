@@ -14,6 +14,10 @@ const io = new Server(server, {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send("Server working fine")
+})
+
 const PORT = process.env.PORT || 3001;
 const GRID_SIZE = 40;
 const COOLDOWN_MS = 500;
@@ -45,7 +49,7 @@ io.on('connection', (socket) => {
   // Assign color and name
   const color = getRandomElement(colors);
   const name = `${getRandomElement(names)} ${Math.floor(Math.random() * 1000)}`;
-  
+
   users.set(socket.id, {
     id: socket.id,
     name,
